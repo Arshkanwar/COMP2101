@@ -48,12 +48,12 @@
 
 echo "
 Hostname      : $(hostname)
-LAN Address   : $(ip a s enp0s3|grep 'inet '|awk '{print $2}'|sed 's,/.*,,')
-LAN Name      : $(getent hosts `ip a s enp0s3|grep 'inet '|awk '{print $2}'|sed 's,/.*,,'` | awk '{print $2}')
+LAN Address   : $(ip a s ens33|grep 'inet '|awk '{print $2}'|sed 's,/.*,,')
+LAN Name      : $(getent hosts `ip a s ens33|grep 'inet '|awk '{print $2}'|sed 's,/.*,,'` | awk '{print $2}')
 Router 	      : $(ip route | grep default | awk '{print $3}')
 Router Name   : $(getent hosts `ip route|grep 'default '|awk '{print $3}'|sed 's,/.*,,'` | awk '{print $2}')
-Network	      : $(ip route | awk '{print $1}' | grep 10 |sed 's,/.*,,')
+Network	Num   : $(getent networks | awk '{print $2}')
 Network Name  : $(getent hosts `ip route|awk '{print $1}'|grep 10 |sed 's,/.*,,'` | awk '{print $2}')
 External IP   : $(curl -s icanhazip.com)
-External Name : $(getent hosts `curl -s icanhazip.com` | awk '{print $2}')
+External Name : $(getent hosts 'curl -s icanhazip.com' | awk '{print $2}')
 "
